@@ -4,24 +4,45 @@ class Node:
         self.next = None
 
 
-# my solution
+# # my solution
+# def longest_streak(head):
+#     max_count = 1
+#     current_count = 1
+#     if head is None:
+#         return 0
+#     prev = head
+#     cur = head.next
+#     while cur is not None:
+#         if prev.val == cur.val:
+#             current_count += 1
+#         if max_count < current_count:
+#             max_count = current_count
+#             current_count = 1
+#         prev = cur
+#         cur = cur.next
+
+#     return max_count
+
+
+# structy solution is nicer i think
 def longest_streak(head):
-    max_count = 1
-    current_count = 1
     if head is None:
         return 0
-    prev = head
-    cur = head.next
+    streak = 0
+    streak_val = head.val
+    cur = head
+    max_streak = 0
+
     while cur is not None:
-        if prev.val == cur.val:
-            current_count += 1
-        if max_count < current_count:
-            max_count = current_count
-            current_count = 1
-        prev = cur
+        if streak_val == cur.val:
+            streak += 1
+        else:
+            max_streak = max(max_streak, streak)
+            streak = 1
+            streak_val = cur.val
         cur = cur.next
 
-    return max_count
+    return max(max_streak, streak)
 
 
 a = Node(5)
