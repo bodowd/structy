@@ -5,13 +5,30 @@ class Node:
         self.right = None
 
 
+# DFS recursive
+# def tree_value_count(root, target):
+#     if root is None:
+#         return 0
+#     match = 1 if root.val == target else 0
+#     left_matches = tree_value_count(root.left, target)
+#     right_matches = tree_value_count(root.right, target)
+#     return match + left_matches + right_matches
+
+# DFS iterative
 def tree_value_count(root, target):
+    stack = [root]
+    matches = 0
     if root is None:
         return 0
-    match = 1 if root.val == target else 0
-    left_matches = tree_value_count(root.left, target)
-    right_matches = tree_value_count(root.right, target)
-    return match + left_matches + right_matches
+    while stack:
+        cur = stack.pop()
+        if cur.val == target:
+            matches += 1
+        if cur.left is not None:
+            stack.append(cur.left)
+        if cur.right is not None:
+            stack.append(cur.right)
+    return matches
 
 
 a = Node(12)
