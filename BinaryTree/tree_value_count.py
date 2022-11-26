@@ -1,3 +1,6 @@
+from collections import deque
+
+
 class Node:
     def __init__(self, val):
         self.val = val
@@ -15,19 +18,35 @@ class Node:
 #     return match + left_matches + right_matches
 
 # DFS iterative
+# def tree_value_count(root, target):
+#     stack = [root]
+#     matches = 0
+#     if root is None:
+#         return 0
+#     while stack:
+#         cur = stack.pop()
+#         if cur.val == target:
+#             matches += 1
+#         if cur.left is not None:
+#             stack.append(cur.left)
+#         if cur.right is not None:
+#             stack.append(cur.right)
+#     return matches
+
+# BFS
 def tree_value_count(root, target):
-    stack = [root]
+    queue = deque([root])
     matches = 0
     if root is None:
         return 0
-    while stack:
-        cur = stack.pop()
+    while queue:
+        cur = queue.popleft()
         if cur.val == target:
             matches += 1
         if cur.left is not None:
-            stack.append(cur.left)
+            queue.append(cur.left)
         if cur.right is not None:
-            stack.append(cur.right)
+            queue.append(cur.right)
     return matches
 
 
